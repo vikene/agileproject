@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('/Users/vigneashsundar/.android/debug.keystore')
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.prady.stocktrade_news"
@@ -14,6 +22,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -33,4 +44,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
+
+apply plugin: 'com.google.gms.google-services'
