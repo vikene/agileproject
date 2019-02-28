@@ -51,6 +51,8 @@ public class add_transaction extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                
                 final String ticker_text = mTicker.getText().toString();
                 final int quant = Integer.parseInt(quantityField.getText().toString());
                 final int pric = Integer.parseInt(priceField.getText().toString());

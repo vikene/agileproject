@@ -91,7 +91,6 @@ public class Main2Activity extends AppCompatActivity {
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        actionBar = getSupportActionBar();
         tr = new ArrayList<>();
         wl = new ArrayList<>();
         nv = (NavigationView)findViewById(R.id.nv);
@@ -120,6 +119,7 @@ public class Main2Activity extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -128,9 +128,14 @@ public class Main2Activity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myint = new Intent(getApplicationContext(), addWatch.class);
-                startActivity(myint);
-
+                if(mViewPager.getCurrentItem() == 0){
+                    Intent myint = new Intent(getApplicationContext(), add_transaction.class);
+                    startActivity(myint);
+                }
+                else{
+                    Intent myint = new Intent(getApplicationContext(), addWatch.class);
+                    startActivity(myint);
+                }
             }
         });
 
@@ -428,14 +433,13 @@ public class Main2Activity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            Log.d("javu", position +"");
             if (position == 0 ){
 
-
+                Log.d("JAAAAAA","HSS");
                 return  new holdings_fragment();
             }
             else if (position == 1) {
-
+                Log.d("JAAAAAA","HSSa");
                 return  new watchlist();
             }
             else{
