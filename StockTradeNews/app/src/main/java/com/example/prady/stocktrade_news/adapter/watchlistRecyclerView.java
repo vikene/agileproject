@@ -20,9 +20,14 @@ public class watchlistRecyclerView  extends RecyclerView.Adapter<watclist> {
     private List<String> tickerData;
     private  List<watchlistModel> ticker_Data;
     private LayoutInflater mInflater;
+    private watchlistRecyclerView adapter;
     public watchlistRecyclerView(List<watchlistModel> mylist, Context context){
         ticker_Data = mylist;
         mInflater = LayoutInflater.from(context);
+
+    }
+    public void setAdapter(watchlistRecyclerView madapter){
+        adapter = madapter;
     }
     @NonNull
     @Override
@@ -32,10 +37,18 @@ public class watchlistRecyclerView  extends RecyclerView.Adapter<watclist> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull watclist holder, int position) {
+    public void onBindViewHolder(@NonNull watclist holder, final int position) {
         watchlistModel data = ticker_Data.get(position);
         holder.setHoldingTicker(data.name+" , "+data.description);
         holder.setHolding_gain(data.price);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ticker_Data.remove(position);
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+        });
 
     }
 

@@ -1,5 +1,8 @@
 package com.example.prady.stocktrade_news;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -28,6 +31,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,6 +56,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +87,10 @@ public class Main2Activity extends AppCompatActivity {
     public static List<transactionData> tr;
     public  static  List<watchlistModel> wl;
     public static ActionBar actionBar;
+    static Button dob;
+    static Button dob1;
+    static android.app.FragmentManager mFragementManager;
+    static holdingRecyclerView madapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +128,7 @@ public class Main2Activity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
+        mFragementManager = getFragmentManager();
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -311,6 +321,8 @@ public class Main2Activity extends AppCompatActivity {
             RecyclerView rv = rootView.findViewById(R.id.rv);
             rv.setLayoutManager(new LinearLayoutManager(getContext()));
             wadapter = new watchlistRecyclerView(wl,getContext());
+            wadapter.setAdapter(wadapter);
+
             rv.setAdapter(wadapter);
             db();
             return rootView;
@@ -360,6 +372,8 @@ public class Main2Activity extends AppCompatActivity {
 
     public static class holdings_fragment extends Fragment {
         public holdingRecyclerView adapter;
+        public TextView HoldingPage_final;
+        public int count;
 
         public holdings_fragment(){
 
@@ -373,11 +387,34 @@ public class Main2Activity extends AppCompatActivity {
             rv.setLayoutManager(new LinearLayoutManager(getContext()));
             ImageView im = rootView.findViewById(R.id.ImageBack);
             Glide.with(this).load(R.mipmap.line_graph_dribbbble).into(im);
-
+            HoldingPage_final = rootView.findViewById(R.id.HoldingPage_final);
             ImageView im2 = rootView.findViewById(R.id.imUP);
             Glide.with(this).load(R.mipmap.greenarrow).into(im2);
             adapter = new holdingRecyclerView(tr,getContext());
+            madapter = adapter;
+            count = 0;
             rv.setAdapter(adapter);
+            dob =rootView.findViewById(R.id.from);
+            dob.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+
+                    DialogFragment newFragment = new SelectDateFragment();
+                    newFragment.show(mFragementManager, "DatePicker");
+
+
+                }
+            });
+            dob1 = rootView.findViewById(R.id.to);
+            dob1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogFragment newFragment = new SelectDateFragment1();
+                    newFragment.show(mFragementManager, "DatePicker");
+
+                }
+            });
             db();
             return rootView;
         }
@@ -388,6 +425,8 @@ public class Main2Activity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
 
                     transactionData trdata = dataSnapshot.getValue(transactionData.class);
+                    count += trdata.price;
+                    HoldingPage_final.setText("$ "+count+"");
                     tr.add(trdata);
                     adapter.notifyDataSetChanged();
 
@@ -418,6 +457,52 @@ public class Main2Activity extends AppCompatActivity {
             DatabaseReference myref2 = database.getReference("/transaction");
             myref2.addChildEventListener(childEventListener);
         }
+
+
+    }
+
+    public static class SelectDateFragment1 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar calendar = Calendar.getInstance();
+            int yy = calendar.get(Calendar.YEAR);
+            int mm = calendar.get(Calendar.MONTH);
+            int dd = calendar.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(), this, yy, mm, dd);
+        }
+
+        public void onDateSet(DatePicker view, int yy, int mm, int dd) {
+            populateSetDate(yy, mm+1, dd);
+        }
+        public void populateSetDate(int year, int month, int day) {
+            dob1.setText(month+"/"+day+"/"+year);
+
+        }
+
+    }
+    public static class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar calendar = Calendar.getInstance();
+            int yy = calendar.get(Calendar.YEAR);
+            int mm = calendar.get(Calendar.MONTH);
+            int dd = calendar.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(), this, yy, mm, dd);
+        }
+
+        public void onDateSet(DatePicker view, int yy, int mm, int dd) {
+            populateSetDate(yy, mm+1, dd);
+        }
+        public void populateSetDate(int year, int month, int day) {
+            dob.setText(month+"/"+day+"/"+year);
+            if(day == 2){
+                tr.clear();
+                madapter.notifyDataSetChanged();
+            }
+        }
+
     }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
