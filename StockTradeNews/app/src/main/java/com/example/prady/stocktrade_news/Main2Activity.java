@@ -27,16 +27,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.prady.stocktrade_news.adapter.holdingRecyclerView;
 import com.example.prady.stocktrade_news.api.ApiClient;
 import com.example.prady.stocktrade_news.api.ApiInterfaces;
 import com.example.prady.stocktrade_news.models.Article;
 import com.example.prady.stocktrade_news.models.News;
+import com.example.prady.stocktrade_news.models.transactionData;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,6 +74,7 @@ public class Main2Activity extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+    public static List<transactionData> tr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +85,7 @@ public class Main2Activity extends AppCompatActivity {
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        tr = new ArrayList<>();
         nv = (NavigationView)findViewById(R.id.nv);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,6 +107,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -104,8 +120,9 @@ public class Main2Activity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent myint = new Intent(getApplicationContext(), addWatch.class);
+                startActivity(myint);
+
             }
         });
 
@@ -262,36 +279,7 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
-    public static class checkdb extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
 
-
-        public checkdb() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static checkdb newInstance() {
-            checkdb fragment = new checkdb();
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.check_test_db, container, false);
-            TextView tv = rootView.findViewById(R.id.checkdb);
-            tv.setText("Check Holdings  db insertion 1 - passed = assert True \n Check Holdings  db update 1 - passed = assert True \n Check Holdings db delete 1 - passed = assert True");
-            return rootView;
-        }
-
-
-    }
     public static class checkdb1 extends Fragment {
         /**
          * The fragment argument representing the section number for this
@@ -315,14 +303,76 @@ public class Main2Activity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.check_test_db, container, false);
-            TextView tv = rootView.findViewById(R.id.checkdb);
-            tv.setText("Check Watch list db insertion 1 - passed = assert True \n Check Watch list db update 1 - passed = assert True \n Check Watch list db delete 1 - passed = assert True");
+            //TextView tv = rootView.findViewById(R.id.checkdb);
+            //tv.setText("Check Watch list db insertion 1 - passed = assert True \n Check Watch list db update 1 - passed = assert True \n Check Watch list db delete 1 - passed = assert True");
             return rootView;
         }
 
 
     }
 
+
+    public static class holdings_fragment extends Fragment {
+        public holdingRecyclerView adapter;
+
+        public holdings_fragment(){
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.holdings_page, container, false);
+            RecyclerView rv = rootView.findViewById(R.id.holdingRecycler);
+            rv.setLayoutManager(new LinearLayoutManager(getContext()));
+            ImageView im = rootView.findViewById(R.id.ImageBack);
+            Glide.with(this).load(R.mipmap.line_graph_dribbbble).into(im);
+
+            ImageView im2 = rootView.findViewById(R.id.imUP);
+            Glide.with(this).load(R.mipmap.greenarrow).into(im2);
+            adapter = new holdingRecyclerView(tr,getContext());
+            rv.setAdapter(adapter);
+            db();
+            return rootView;
+        }
+        public void db(){
+             final String TAG = "Firebase";
+            ChildEventListener childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+
+                    transactionData trdata = dataSnapshot.getValue(transactionData.class);
+                    tr.add(trdata);
+                    adapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myref2 = database.getReference("/transaction");
+            myref2.addChildEventListener(childEventListener);
+        }
+    }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -339,7 +389,7 @@ public class Main2Activity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             Log.d("javu", position +"");
             if (position == 0 ){
-                return  new checkdb();
+                return  new holdings_fragment();
             }
             else if (position == 1) {
                 return  new checkdb1();

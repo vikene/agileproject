@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/addTransactionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:text="ADD TRANSACTION"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textSize="30dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#fff"
+            android:background="#b22222"/>
+
+
+        <EditText
+            android:id="@+id/enter_ticker_text_input"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below= "@+id/addTransactionText"
+            android:inputType="text"
+            android:paddingTop="24dp"
+            android:paddingLeft="16dp"
+            android:textColor="#b22222"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:hint="Enter Ticker Symbol"/>
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:id="@+id/radio_group"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="40dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:orientation="horizontal">
+
+            <RadioButton android:id="@+id/radio_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" BUY"
+                android:paddingRight="150dp"
+                android:textColor="#b22222"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif" />
+
+            <RadioButton android:id="@+id/radio_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" SELL"
+                android:textSize="20dp"
+                android:textColor="#b22222"
+                android:fontFamily="sans-serif"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/dateOfTransactionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:text="Date Of Transaction "
+            android:textAllCaps="true"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#b22222"
+            />
+
+        <EditText
+            android:id="@+id/dateOfTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="50"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="#b22222"
+            android:hint="Enter Date of Transaction"
+            android:inputType="date"/>
+
+
+
+        <TextView
+            android:id="@+id/quantityText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:text="Quantity "
+            android:textAllCaps="true"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#b22222"
+            />
+        <EditText
+            android:id="@+id/enter_quantity_text_input"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="#b22222"
+            android:hint="Enter Quantity"/>
+
+
+        <TextView
+            android:id="@+id/priceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:layout_weight="0"
+            android:text="Price"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="#b22222"/>
+        <!--android:layout_marginRight="36dp"-->
+        <EditText
+            android:id="@+id/enter_price_text_input"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="#b22222"
+            android:hint="Enter Price"/>
+
+        <TextView
+            android:id="@+id/TransactionFeeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:layout_weight="0"
+            android:text="Transaction Fee"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="#b22222"/>
+
+        <EditText
+            android:id="@+id/enter_transaction_fee_text_input"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="#b22222"
+            android:hint="Enter Fee"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="50dp"
+            android:paddingBottom="16dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/save_button_id"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="24dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#fff"
+                android:background="#b22222"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/cancel_button_id"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:fontFamily="sans-serif"
+                android:textColor="#fff"
+                android:background="#b22222"
+                android:text="Cancel" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

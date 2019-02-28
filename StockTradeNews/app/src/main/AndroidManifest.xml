@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".addWatch"></activity>
+        <activity android:name=".add_transaction" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -36,8 +39,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
-            android:label="Please signup with Facebook"
-            >
+            android:label="Please signup with Facebook">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,15 +48,14 @@
         </activity>
         <activity
             android:name=".Main2Activity"
-            android:label="Stock Track"
-            />
-        <activity android:name=".PIN"
-            android:label="Setup PIN"
-            />
-        <activity android:name=".auth_pin"
-            android:label="ENTER PIN"
-            />
-        <activity android:name=".account_settings"></activity>
+            android:label="Stock Track" />
+        <activity
+            android:name=".PIN"
+            android:label="Setup PIN" />
+        <activity
+            android:name=".auth_pin"
+            android:label="ENTER PIN" />
+        <activity android:name=".account_settings" />
     </application>
 
 </manifest>
