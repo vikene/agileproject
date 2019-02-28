@@ -11,29 +11,30 @@ import android.view.ViewGroup;
 import com.example.prady.stocktrade_news.Holdings_recyclerView;
 import com.example.prady.stocktrade_news.R;
 import com.example.prady.stocktrade_news.models.transactionData;
+import com.example.prady.stocktrade_news.models.watchlistModel;
+import com.example.prady.stocktrade_news.viewholder.watclist;
 
 import java.util.List;
 
-public class watchlistRecyclerView  extends RecyclerView.Adapter<Holdings_recyclerView> {
+public class watchlistRecyclerView  extends RecyclerView.Adapter<watclist> {
     private List<String> tickerData;
-    private  List<transactionData> ticker_Data;
+    private  List<watchlistModel> ticker_Data;
     private LayoutInflater mInflater;
-    public watchlistRecyclerView(List<transactionData> mylist, Context context){
+    public watchlistRecyclerView(List<watchlistModel> mylist, Context context){
         ticker_Data = mylist;
         mInflater = LayoutInflater.from(context);
     }
     @NonNull
     @Override
-    public Holdings_recyclerView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.holdings_row,parent,false);
-        return new Holdings_recyclerView(view);
+    public watclist onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.watchlistrow,parent,false);
+        return new watclist(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holdings_recyclerView holder, int position) {
-        transactionData data = ticker_Data.get(position);
-        Log.d("JAVUU", data.ticker);
-        holder.setHoldingTicker(data.ticker);
+    public void onBindViewHolder(@NonNull watclist holder, int position) {
+        watchlistModel data = ticker_Data.get(position);
+        holder.setHoldingTicker(data.name+" , "+data.description);
         holder.setHolding_gain(data.price);
 
     }

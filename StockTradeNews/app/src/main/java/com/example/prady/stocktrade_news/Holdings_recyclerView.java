@@ -17,7 +17,7 @@ public class Holdings_recyclerView extends RecyclerView.ViewHolder implements Vi
         holding_ticker.setAllCaps(true);
     }
     public void setHolding_gain(int prices){
-        holding_gain.setText(prices+"");
+        holding_gain.setText("$ "+prices+"");
     }
     public Holdings_recyclerView(View itemView){
         super(itemView);

@@ -2,11 +2,13 @@ package com.example.prady.stocktrade_news;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -33,11 +35,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.prady.stocktrade_news.adapter.holdingRecyclerView;
+import com.example.prady.stocktrade_news.adapter.watchlistRecyclerView;
 import com.example.prady.stocktrade_news.api.ApiClient;
 import com.example.prady.stocktrade_news.api.ApiInterfaces;
 import com.example.prady.stocktrade_news.models.Article;
 import com.example.prady.stocktrade_news.models.News;
 import com.example.prady.stocktrade_news.models.transactionData;
+import com.example.prady.stocktrade_news.models.watchlistModel;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -75,6 +79,8 @@ public class Main2Activity extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     public static List<transactionData> tr;
+    public  static  List<watchlistModel> wl;
+    public static ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +91,9 @@ public class Main2Activity extends AppCompatActivity {
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        actionBar = getSupportActionBar();
         tr = new ArrayList<>();
+        wl = new ArrayList<>();
         nv = (NavigationView)findViewById(R.id.nv);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -280,32 +288,65 @@ public class Main2Activity extends AppCompatActivity {
     }
 
 
-    public static class checkdb1 extends Fragment {
+    public static class watchlist extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
+        public watchlistRecyclerView wadapter;
 
-
-        public checkdb1() {
+        public watchlist() {
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static checkdb1 newInstance() {
-            checkdb1 fragment = new checkdb1();
-            return fragment;
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.check_test_db, container, false);
-            //TextView tv = rootView.findViewById(R.id.checkdb);
-            //tv.setText("Check Watch list db insertion 1 - passed = assert True \n Check Watch list db update 1 - passed = assert True \n Check Watch list db delete 1 - passed = assert True");
+            View rootView = inflater.inflate(R.layout.watchlist, container, false);
+            RecyclerView rv = rootView.findViewById(R.id.rv);
+            rv.setLayoutManager(new LinearLayoutManager(getContext()));
+            wadapter = new watchlistRecyclerView(wl,getContext());
+            rv.setAdapter(wadapter);
+            db();
             return rootView;
+        }
+
+        public void db(){
+            final String TAG = "Firebase";
+            ChildEventListener childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+
+                    watchlistModel trdata = dataSnapshot.getValue(watchlistModel.class);
+                    wl.add(trdata);
+                    wadapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myref2 = database.getReference("/watchlist");
+            myref2.addChildEventListener(childEventListener);
         }
 
 
@@ -389,10 +430,13 @@ public class Main2Activity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             Log.d("javu", position +"");
             if (position == 0 ){
+
+
                 return  new holdings_fragment();
             }
             else if (position == 1) {
-                return  new checkdb1();
+
+                return  new watchlist();
             }
             else{
                 return new NewsView();
