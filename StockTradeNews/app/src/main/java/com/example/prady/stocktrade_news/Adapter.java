@@ -37,7 +37,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     private Context context;
     private OnItemClickListener onItemClickListener;
 
-
     public Adapter(List<Article> articles, Context context) {
         this.articles = articles;
         this.context = context;
@@ -84,9 +83,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         holder.time.setText("\u2022" + Utils.DateToTimeFormat(model.getPublishedAt()));
         holder.published_at.setText(Utils.DateFormat(model.getPublishedAt()));
         holder.author.setText(model.getAuthor());
-
-
-
 
     }
 

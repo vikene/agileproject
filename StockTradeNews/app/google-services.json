@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "166260810551",
+    "firebase_url": "https://stocktradenews-5d1a5.firebaseio.com",
+    "project_id": "stocktradenews-5d1a5",
+    "storage_bucket": "stocktradenews-5d1a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166260810551:android:665f9059eb5ce06d",
+        "android_client_info": {
+          "package_name": "com.example.prady.stocktrade_news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166260810551-lij7ukpnmgn460b8d2g9sqemhcbu98fj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPPOS4Mmwn5tnPowVBvxS5vAJ6OHc3xqk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

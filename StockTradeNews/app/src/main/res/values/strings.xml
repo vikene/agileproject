@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">StockTrade-News</string>
+    <string name="app_name">StockTrade</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="facebook_app_id">340445256892081</string>
+    <string name="fb_login_protocol_scheme">fb340445256892081</string>
+    <string name="OPEN">fb340445256892081</string>
+    <string name="CLOSE">fb340445256892081</string>
+    <string name="name">name</string>
+    <string name="email">email</string>
+    <string name="phone">phone</string>
+    <string name="StockTrade">Stock Trade</string>
+
 </resources>

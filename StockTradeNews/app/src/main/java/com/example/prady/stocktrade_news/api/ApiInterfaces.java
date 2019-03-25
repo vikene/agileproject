@@ -1,5 +1,6 @@
 package com.example.prady.stocktrade_news.api;
 
+import com.example.prady.stocktrade_news.Market;
 import com.example.prady.stocktrade_news.models.News;
 
 import retrofit2.Call;
