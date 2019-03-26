@@ -1,6 +1,7 @@
 package com.example.prady.stocktrade_news.Utility;
 
 
+import com.example.prady.stocktrade_news.models.History;
 import com.example.prady.stocktrade_news.models.MarketWatch;
 
 import retrofit2.Call;
@@ -18,5 +19,8 @@ public interface ApiInterface {
     // add another api here
     @GET("api/v1/stock?")
     Call<MarketWatch> getStockQuotes(@Query(AppConstants.SYMBOL) String query, @Query(AppConstants.API_TOKEN) String query2);
+
+    @GET("api/v1/history?")
+    Call<History> getHistory(@Query(AppConstants.SYMBOL) String query, @Query(AppConstants.API_TOKEN) String query2);
 
 }

@@ -20,7 +20,7 @@
             android:id="@+id/edt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/title"
+            android:hint="title"
             android:inputType="textCapSentences"
             android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
@@ -34,15 +34,14 @@
             android:id="@+id/edt_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/description"
+            android:hint="description"
             android:inputType="textCapSentences"
             android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btn_submit"
-        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/submit" />
+        android:layout_height="50dp"
+        android:text="Submit" />
 </LinearLayout>

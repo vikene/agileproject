@@ -63,6 +63,11 @@
             android:name=".auth_pin"
             android:label="ENTER PIN" />
         <activity android:name=".account_settings" />
+        <activity android:name=".NotesMainActivity"
+                    android:label="Notes" />
+        <activity android:name=".FormAddUpdateActivity"
+                />
+
     </application>
 
 </manifest>

@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import static com.example.prady.stocktrade_news.FormAddUpdateActivity.REQUEST_UPDATE;
 
 
-public class MainActivity extends AppCompatActivity
+public class NotesMainActivity extends AppCompatActivity
         implements View.OnClickListener{
     RecyclerView rvNotes;
     ProgressBar progressBar;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_notes_main);
 
         getSupportActionBar().setTitle("Notes");
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.fab_add){
-            Intent intent = new Intent(MainActivity.this, FormAddUpdateActivity.class);
+            Intent intent = new Intent(NotesMainActivity.this, FormAddUpdateActivity.class);
             startActivityForResult(intent, FormAddUpdateActivity.REQUEST_ADD);
         }
     }

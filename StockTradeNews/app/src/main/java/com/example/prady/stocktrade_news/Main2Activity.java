@@ -117,7 +117,10 @@ public class Main2Activity extends AppCompatActivity {
                     case R.id.settings:
                         Toast.makeText(getApplicationContext(), "Watch list",Toast.LENGTH_SHORT).show();
                     case R.id.mycart:
-                        Toast.makeText(getApplicationContext(), "Holdings",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Notes",Toast.LENGTH_SHORT).show();
+                        Intent notes = new Intent(getApplicationContext(), NotesMainActivity.class);
+                        startActivity(notes);
+
                     default:
                         return true;
                 }
