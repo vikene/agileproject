@@ -1,17 +1,21 @@
 package com.example.prady.stocktrade_news;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -76,11 +80,19 @@ public class AdapterMW extends RecyclerView.Adapter<AdapterMW.MyViewHolder>{
         holder.ticker.setText(model.getSymbol());
         holder.company.setText(model.getName());
         holder.price.setText(model.getCurrency() + " " + model.getPrice());
-        holder.change.setText(model.getChangePct());
+        holder.change.setText(model.getChangePct()+" %");
+        Double db = Double.parseDouble(model.getChangePct());
+        if(db < 0){
+            holder.change.setTextColor(Color.RED);
+
+        }
+        else{
+            holder.change.setTextColor(Color.GREEN);
+        }
 //        holder.source.setText(model.getSource().getName());
 //        holder.time.setText("\u2022" + Utils.DateToTimeFormat(model.getPublishedAt()));
 //        holder.published_at.setText(Utils.DateFormat(model.getPublishedAt()));
-//        holder.author.setText(model.getAuthor());
+//        holder.author.setText(model.getAuthor())
 
     }
 
@@ -122,7 +134,13 @@ public class AdapterMW extends RecyclerView.Adapter<AdapterMW.MyViewHolder>{
 
         @Override
         public void onClick(View v) {
-            onItemClickListener.onItemClick(v, getAdapterPosition());
+            Intent myintent = new Intent(v.getContext(),Stock_Details.class);
+            myintent.putExtra("ticker",ticker.getText().toString());
+            myintent.putExtra("company", company.getText().toString());
+            myintent.putExtra("price", price.getText().toString());
+            myintent.putExtra("change", change.getText().toString());
+            v.getContext().startActivity(myintent);
+            Log.d("Click", this.ticker+"");
         }
     }
 }

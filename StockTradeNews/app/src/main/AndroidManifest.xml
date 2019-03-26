@@ -52,6 +52,10 @@
         <activity
             android:name=".Main2Activity"
             android:label="Stock Track" />
+        <activity android:name=".MarketWatchActivity"
+            android:label="Market Watch" />
+        <activity android:name=".Stock_Details"
+            android:label="Stock Details" />
         <activity
             android:name=".PIN"
             android:label="Setup PIN" />

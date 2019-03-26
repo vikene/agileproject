@@ -25,10 +25,8 @@ import retrofit2.Response;
 
 public class MarketWatchActivity extends AppCompatActivity {
 
-//    public static final String ALPHA_API_KEY = "Ywy8s2NN6hwjJRZztGMf";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-//    private RecyclerView.Adapter adapter;
     private String ticker;
     private String TAG = MainActivity.class.getSimpleName();
     private List<MarketWatch> marketwatch = new ArrayList<>();
