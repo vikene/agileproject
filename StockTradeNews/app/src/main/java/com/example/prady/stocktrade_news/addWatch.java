@@ -28,5 +28,6 @@ public class addWatch extends AppCompatActivity {
         setContentView(R.layout.activity_add_watch);
         Intent myintent = new Intent(addWatch.this, MarketWatchActivity.class);
         startActivity(myintent);
+        finish();
     }
 }
