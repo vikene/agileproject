@@ -1,5 +1,7 @@
 package com.example.prady.stocktrade_news;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,8 +10,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
+import android.support.v7.widget.SearchView;
 
 import com.example.prady.stocktrade_news.adapter.NoteAdapter;
 import com.example.prady.stocktrade_news.db.NoteHelper;
@@ -20,9 +28,9 @@ import java.util.LinkedList;
 
 import static com.example.prady.stocktrade_news.FormAddUpdateActivity.REQUEST_UPDATE;
 
+//public class NotesMainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-public class NotesMainActivity extends AppCompatActivity
-        implements View.OnClickListener{
+public class NotesMainActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView rvNotes;
     ProgressBar progressBar;
     FloatingActionButton fabAdd;
@@ -35,9 +43,7 @@ public class NotesMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_main);
-
         getSupportActionBar().setTitle("Notes");
-
         rvNotes = (RecyclerView)findViewById(R.id.rv_notes);
         rvNotes.setLayoutManager(new LinearLayoutManager(this));
         rvNotes.setHasFixedSize(true);
@@ -60,6 +66,54 @@ public class NotesMainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+//        searchView.setOnQueryTextListener(this);
+
+        /*searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });*/
+
+        /*SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));*/
+
+        return true;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }
@@ -71,6 +125,8 @@ public class NotesMainActivity extends AppCompatActivity
             startActivityForResult(intent, FormAddUpdateActivity.REQUEST_ADD);
         }
     }
+
+
 
     private class LoadNoteAsync extends AsyncTask<Void, Void, ArrayList<Note>> {
         @Override
@@ -97,9 +153,9 @@ public class NotesMainActivity extends AppCompatActivity
             adapter.setListNotes(list);
             adapter.notifyDataSetChanged();
 
-            if (list.size() == 0){
-                showSnackbarMessage("No data ");
-            }
+//            if (list.size() == 0){
+//                showSnackbarMessage("No data ");
+//            }
         }
     }
 
@@ -109,7 +165,7 @@ public class NotesMainActivity extends AppCompatActivity
         if (requestCode == FormAddUpdateActivity.REQUEST_ADD){
             if (resultCode == FormAddUpdateActivity.RESULT_ADD){
                 new LoadNoteAsync().execute();
-                showSnackbarMessage("One item successfully added");
+                showSnackbarMessage("Note added successfully");
                 // rvNotes.getLayoutManager().smoothScrollToPosition(rvNotes, new RecyclerView.State(), 0);
             }
         }
@@ -127,7 +183,7 @@ public class NotesMainActivity extends AppCompatActivity
                 list.remove(position);
                 adapter.setListNotes(list);
                 adapter.notifyDataSetChanged();
-                showSnackbarMessage("one item successfully deleted");
+                showSnackbarMessage("Note deleted successfully");
             }
         }
     }
