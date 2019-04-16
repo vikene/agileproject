@@ -49,6 +49,10 @@ public class MarketWatchActivity extends AppCompatActivity {
 
         callMarketAPI("AAPL,MSFT,TSLA,AMZN,MU", AppConstants.API_KEY);
         callMarketAPI("NFLX,PETQ,WIX,ERF,SWN", AppConstants.API_KEY);
+        callMarketAPI("FNF,NOK,QCOM,GE,SIRI", AppConstants.API_KEY);
+        callMarketAPI("TXT,BA,KMB,T,FB", AppConstants.API_KEY);
+
+
     }
 
 //    private void callMarketAPI(String identifier, String item, String apiKey) {

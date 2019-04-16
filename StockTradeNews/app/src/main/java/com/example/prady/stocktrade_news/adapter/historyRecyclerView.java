@@ -14,18 +14,18 @@ import com.example.prady.stocktrade_news.models.transactionData;
 
 import java.util.List;
 
-public class holdingRecyclerView extends RecyclerView.Adapter<Holdings_recyclerView> {
+public class historyRecyclerView extends RecyclerView.Adapter<Holdings_recyclerView> {
     private List<String> tickerData;
     private  List<transactionData> ticker_Data;
     private LayoutInflater mInflater;
-    public holdingRecyclerView(List<transactionData> mylist, Context context){
+    public historyRecyclerView(List<transactionData> mylist, Context context){
         ticker_Data = mylist;
         mInflater = LayoutInflater.from(context);
     }
     @NonNull
     @Override
     public Holdings_recyclerView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.holdings_row,parent,false);
+        View view = mInflater.inflate(R.layout.history_row,parent,false);
         return new Holdings_recyclerView(view);
     }
 
@@ -34,7 +34,7 @@ public class holdingRecyclerView extends RecyclerView.Adapter<Holdings_recyclerV
         transactionData data = ticker_Data.get(position);
         holder.setHoldingTicker(data.ticker);
         holder.setHolding_gain(data.price);
-
+        holder.setHolding_date(data.date);
     }
 
     @Override

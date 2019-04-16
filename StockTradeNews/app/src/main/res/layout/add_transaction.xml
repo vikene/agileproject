@@ -84,7 +84,7 @@
             />
 
         <EditText
-            android:id="@+id/dateOfTransaction"
+            android:id="@+id/dt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="50"
@@ -92,8 +92,9 @@
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
             android:textColor="#b22222"
-            android:hint="Enter Date of Transaction"
-            android:inputType="date"/>
+            android:hint="Enter Transaction"
+            android:inputType="text"
+            />
 
 
 

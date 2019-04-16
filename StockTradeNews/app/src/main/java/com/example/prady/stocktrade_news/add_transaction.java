@@ -1,8 +1,10 @@
 package com.example.prady.stocktrade_news;
 
 import android.content.Intent;
+import android.renderscript.Type;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -15,25 +17,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Transaction;
 
+import org.w3c.dom.TypeInfo;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static android.widget.Toast.*;
 
 public class add_transaction extends AppCompatActivity {
-
+    private  String itemBuySell;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
         final EditText mTicker = (EditText) findViewById(R.id.enter_ticker_text_input);
-        final EditText dot = (EditText) findViewById(R.id.dateOfTransaction) ;
+        final EditText dot = (EditText) findViewById(R.id.dt) ;
         final EditText quantityField = (EditText) findViewById(R.id.enter_quantity_text_input);
         final EditText priceField = (EditText) findViewById(R.id.enter_price_text_input);
         final EditText transactionFeeField =(EditText) findViewById(R.id.enter_transaction_fee_text_input);
+        dot.setInputType(InputType.TYPE_CLASS_TEXT);
         String tickerText = mTicker.getText().toString();
         String dateOfTransaction = "";
-        String itemBuySell = "";
         int quantity;
         int price;
         int transactionfee;
@@ -41,15 +45,21 @@ public class add_transaction extends AppCompatActivity {
 
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
         int radioButtonClicked = radioGroup.getCheckedRadioButtonId();
-        switch (radioButtonClicked)
-        {
-            case R.id.radio_buy :
-                itemBuySell = "Buy";
-                break;
-            case R.id.radio_sell :
-                itemBuySell = "Sell";
-                break;
-        }
+        itemBuySell = "Buy";
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radio_buy :
+                        itemBuySell = "Buy";
+                        break;
+                    case R.id.radio_sell :
+                        itemBuySell = "Sell";
+                        break;
+                }
+            }
+        });
+
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +78,7 @@ public class add_transaction extends AppCompatActivity {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("/");
                     String key = myRef.child("/").push().getKey();
-                    transactionData post = new transactionData(ticker_text, quant * pric);
+                    transactionData post = new transactionData(ticker_text, quant * pric,itemBuySell,dot.getText().toString());
                     Map<String, Object> postValues = post.toMap();
 
                     Map<String, Object> childUpdates = new HashMap<>();

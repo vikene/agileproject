@@ -84,7 +84,7 @@
             />
 
         <EditText
-            android:id="@+id/dateOfTransaction"
+            android:id="@+id/dt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="50"

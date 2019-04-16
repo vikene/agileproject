@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".addWatch"></activity>
+        <activity android:name=".history"></activity>
+        <activity android:name=".performance" />
+        <activity android:name=".addWatch" />
         <activity android:name=".add_transaction" />
 
         <meta-data
@@ -39,10 +41,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
-            android:label="Stock Trade"
             android:icon="@mipmap/ic_launcher"
-
-            >
+            android:label="Stock Trade">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,9 +52,11 @@
         <activity
             android:name=".Main2Activity"
             android:label="Stock Track" />
-        <activity android:name=".MarketWatchActivity"
+        <activity
+            android:name=".MarketWatchActivity"
             android:label="Market Watch" />
-        <activity android:name=".Stock_Details"
+        <activity
+            android:name=".Stock_Details"
             android:label="Stock Details" />
         <activity
             android:name=".PIN"
@@ -63,11 +65,10 @@
             android:name=".auth_pin"
             android:label="ENTER PIN" />
         <activity android:name=".account_settings" />
-        <activity android:name=".NotesMainActivity"
-                    android:label="Notes" />
-        <activity android:name=".FormAddUpdateActivity"
-                />
-
+        <activity
+            android:name=".NotesMainActivity"
+            android:label="Notes" />
+        <activity android:name=".FormAddUpdateActivity" />
     </application>
 
 </manifest>

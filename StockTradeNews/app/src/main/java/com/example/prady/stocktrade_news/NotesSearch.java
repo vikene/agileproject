@@ -45,7 +45,7 @@ public class NotesSearch extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             //use the query to search your data somehow
-            Cursor cur = nhelp.getWordMatches(query, null);
+           // Cursor cur = nhelp.getWordMatches(query, null);
 //            Log.i("Cursor", cur.toString());
         }
     }

@@ -114,17 +114,30 @@ public class Main2Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Account details",Toast.LENGTH_SHORT).show();
                         Intent account =  new Intent(getApplicationContext(), account_settings.class);
                         startActivity(account);
+                        break;
                     case R.id.settings:
                         Toast.makeText(getApplicationContext(), "Watch list",Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.mycart:
                         Toast.makeText(getApplicationContext(), "Notes",Toast.LENGTH_SHORT).show();
                         Intent notes = new Intent(getApplicationContext(), NotesMainActivity.class);
                         startActivity(notes);
+                        break;
+                    case R.id.performance:
+                        Intent perf = new Intent(getApplicationContext(), performance.class);
+                        startActivity(perf);
+                        break;
+                    case R.id.history:
+                        Intent hist = new Intent(getApplicationContext(), history.class);
+                        startActivity(hist);
+                        break;
 
                     default:
                         return true;
                 }
+                return true;
             }
+
         });
 
 
@@ -428,10 +441,14 @@ public class Main2Activity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
 
                     transactionData trdata = dataSnapshot.getValue(transactionData.class);
-                    count += trdata.price;
-                    HoldingPage_final.setText("$ "+count+"");
-                    tr.add(trdata);
-                    adapter.notifyDataSetChanged();
+
+                    if(!trdata.type.equals("Sell")){
+                        count += trdata.price;
+                        HoldingPage_final.setText("$ "+count+"");
+                        tr.add(trdata);
+                        adapter.notifyDataSetChanged();
+                    }
+
 
                 }
 
