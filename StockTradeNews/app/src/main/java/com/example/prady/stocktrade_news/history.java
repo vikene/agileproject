@@ -146,6 +146,10 @@ public class history extends AppCompatActivity {
                 tr.remove(0);
                 tr.remove(0);
                 tr.remove(0);
+                tr.remove(0);
+                tr.remove(0);
+                tr.remove(0);
+                tr.remove(0);
                 madapter.notifyDataSetChanged();
             }
             if(day > 16){
