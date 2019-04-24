@@ -11,11 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -48,6 +53,7 @@ public class history extends AppCompatActivity {
     public static Button dob1;
     public FragmentManager fragmentManager;
     public static List<transactionData> tr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,44 +66,36 @@ public class history extends AppCompatActivity {
         count = 0;
 
         rv.setAdapter(adapter);
-        dob =findViewById(R.id.from);
+        dob = findViewById(R.id.from);
         dob.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-
                 DialogFragment newFragment = new history.SelectDateFragment();
                 newFragment.show(getFragmentManager(), "DatePicker");
-
-
             }
         });
+
         dob1 = findViewById(R.id.to);
         dob1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 DialogFragment newFragment = new history.SelectDateFragment1();
                 newFragment.show(getFragmentManager(), "DatePicker");
-
             }
         });
         db();
-
     }
+
     public void db(){
         final String TAG = "Firebase";
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-
                 transactionData trdata = dataSnapshot.getValue(transactionData.class);
-                    count += trdata.price;
-                    tr.add(trdata);
-                    adapter.notifyDataSetChanged();
-
-
-
+                count += trdata.price;
+                tr.add(trdata);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -125,6 +123,33 @@ public class history extends AppCompatActivity {
         DatabaseReference myref2 = database.getReference("/transaction");
         myref2.addChildEventListener(childEventListener);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return true;
+    }
+
     public static class SelectDateFragment1 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         @Override
