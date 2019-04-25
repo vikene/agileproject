@@ -9,39 +9,63 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/screen"
     tools:context="com.example.prady.stocktrade_news.FormAddUpdateActivity">
 
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-        <EditText
-            android:id="@+id/edt_title"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="title"
-            android:inputType="textCapSentences"
-            android:maxLines="1" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="-90dp"
+            android:padding="20dp"
+            >
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+                <EditText
+                    android:id="@+id/edt_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Title"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:textSize="@dimen/stringinputSize"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edt_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="description"
-            android:inputType="textCapSentences"
-            android:maxLines="1" />
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Submit" />
+                <EditText
+                    android:id="@+id/edt_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:hint="Description"
+                    android:inputType="text|textMultiLine"
+                    android:maxLines="20"
+                    android:singleLine="false"
+                    android:textSize="@dimen/stringinputSize" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Submit"
+                android:background="@color/com_facebook_messenger_blue"
+                android:textColor="#fff"
+                android:textSize="@dimen/stringinputSize"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
 </LinearLayout>

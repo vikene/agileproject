@@ -14,6 +14,7 @@ import com.example.prady.stocktrade_news.Holdings_recyclerView;
 import com.example.prady.stocktrade_news.R;
 import com.example.prady.stocktrade_news.models.transactionData;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class historyRecyclerView extends RecyclerView.Adapter<Holdings_recyclerV
     private Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            LinkedList<transactionData> filteredList = new LinkedList<>();
+            ArrayList<transactionData> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(ticker_DataFull);
@@ -84,7 +85,7 @@ public class historyRecyclerView extends RecyclerView.Adapter<Holdings_recyclerV
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            ticker_Data.clear();
+            ticker_Data = new ArrayList<>();
             ticker_Data.addAll((List) results.values);
             notifyDataSetChanged();
         }

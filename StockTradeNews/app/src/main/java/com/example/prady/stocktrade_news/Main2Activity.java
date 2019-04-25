@@ -404,8 +404,6 @@ public class Main2Activity extends AppCompatActivity {
             ImageView im = rootView.findViewById(R.id.ImageBack);
             Glide.with(this).load(R.mipmap.line_graph_dribbbble).into(im);
             HoldingPage_final = rootView.findViewById(R.id.HoldingPage_final);
-            ImageView im2 = rootView.findViewById(R.id.imUP);
-            Glide.with(this).load(R.mipmap.greenarrow).into(im2);
             adapter = new holdingRecyclerView(tr,getContext());
             madapter = adapter;
             count = 0;

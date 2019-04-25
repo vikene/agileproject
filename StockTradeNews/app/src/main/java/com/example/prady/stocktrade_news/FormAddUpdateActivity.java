@@ -161,9 +161,9 @@ public class FormAddUpdateActivity extends AppCompatActivity
 
         if (isDialogClose){
             dialogTitle = "Cancel";
-            dialogMessage = "Are you sure on Cancelling form?";
+            dialogMessage = "Discard changes?";
         }else{
-            dialogMessage = "Are you sure about removing this item?";
+            dialogMessage = "Delete this item?";
             dialogTitle = "Delete Note";
         }
 

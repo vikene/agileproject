@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.prady.stocktrade_news.MarketWatchActivity"
-    android:background = "@color/colorBackground">
+    android:background = "@drawable/screen">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

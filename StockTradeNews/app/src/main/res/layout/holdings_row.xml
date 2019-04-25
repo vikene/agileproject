@@ -8,19 +8,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
+        android:textSize="@dimen/stringinputSize"
         android:id="@+id/holding_ticker_row"
         android:layout_weight="0.8"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
         />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginRight="10dp"
         android:layout_weight="0.1"
         android:text="1.0%"
-        android:textSize="14dp"
+        android:textSize="@dimen/stringinputSize"
         android:id="@+id/holding_ticker_profit"
+        android:textStyle="bold"
+        android:textDirection="ltr"
         />
     <ImageView
         android:layout_width="wrap_content"
