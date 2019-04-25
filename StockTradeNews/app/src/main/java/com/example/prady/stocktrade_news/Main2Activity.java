@@ -389,7 +389,7 @@ public class Main2Activity extends AppCompatActivity {
     public static class holdings_fragment extends Fragment {
         public holdingRecyclerView adapter;
         public TextView HoldingPage_final;
-        public int count;
+        public Double count;
 
         public holdings_fragment(){
 
@@ -406,7 +406,7 @@ public class Main2Activity extends AppCompatActivity {
             HoldingPage_final = rootView.findViewById(R.id.HoldingPage_final);
             adapter = new holdingRecyclerView(tr,getContext());
             madapter = adapter;
-            count = 0;
+            count = 0.0;
             rv.setAdapter(adapter);
             dob =rootView.findViewById(R.id.from);
             dob.setOnClickListener(new View.OnClickListener() {
@@ -441,8 +441,8 @@ public class Main2Activity extends AppCompatActivity {
                     transactionData trdata = dataSnapshot.getValue(transactionData.class);
 
                     if(!trdata.type.equals("Sell")){
-                        count += trdata.price;
-                        HoldingPage_final.setText("$ "+count+"");
+                        count += trdata.price*trdata.quantity;
+                        HoldingPage_final.setText("$ "+String.format("%.2f",count) +"");
                         tr.add(trdata);
                         adapter.notifyDataSetChanged();
                     }

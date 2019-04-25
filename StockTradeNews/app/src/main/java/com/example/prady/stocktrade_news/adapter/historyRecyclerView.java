@@ -1,6 +1,7 @@
 package com.example.prady.stocktrade_news.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Filterable;
 
 import com.example.prady.stocktrade_news.Holdings_recyclerView;
 import com.example.prady.stocktrade_news.R;
+import com.example.prady.stocktrade_news.edit_transaction;
 import com.example.prady.stocktrade_news.models.transactionData;
 
 import java.util.ArrayList;
@@ -40,10 +42,20 @@ public class historyRecyclerView extends RecyclerView.Adapter<Holdings_recyclerV
 
     @Override
     public void onBindViewHolder(@NonNull Holdings_recyclerView holder, int position) {
-        transactionData data = ticker_Data.get(position);
+        final transactionData data = ticker_Data.get(position);
         holder.setHoldingTicker(data.ticker);
-        holder.setHolding_gain(data.price);
+        holder.setHolding_gain(data.price*data.quantity+data.transactionfee);
         holder.setHolding_date(data.date);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(view.getContext(), edit_transaction.class);
+                intent.putExtra("ticker",data.ticker);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -12,7 +12,7 @@
 
 
         <EditText
-            android:id="@+id/enter_ticker_text_input"
+            android:id="@+id/enter_ticker_text_input_edit"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
 
@@ -35,7 +35,7 @@
             android:paddingBottom="16dp"
             android:orientation="horizontal">
 
-            <RadioButton android:id="@+id/radio_buy"
+            <RadioButton android:id="@+id/radio_buy_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" BUY"
@@ -44,7 +44,7 @@
                 android:textSize="20dp"
                 android:fontFamily="sans-serif" />
 
-            <RadioButton android:id="@+id/radio_sell"
+            <RadioButton android:id="@+id/radio_sell_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" SELL"
@@ -54,7 +54,7 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/dateOfTransactionText"
+            android:id="@+id/dateOfTransactionText_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -68,7 +68,7 @@
             />
 
         <EditText
-            android:id="@+id/dt"
+            android:id="@+id/dt_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="50"
@@ -82,7 +82,7 @@
 
 
         <TextView
-            android:id="@+id/quantityText"
+            android:id="@+id/quantityText_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
@@ -94,7 +94,7 @@
             android:textColor="#b22222"
             />
         <EditText
-            android:id="@+id/enter_quantity_text_input"
+            android:id="@+id/enter_quantity_text_input_edit"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:inputType="text"
@@ -106,7 +106,7 @@
 
 
         <TextView
-            android:id="@+id/priceText"
+            android:id="@+id/priceText_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
@@ -119,7 +119,7 @@
             android:textColor="#b22222"/>
         <!--android:layout_marginRight="36dp"-->
         <EditText
-            android:id="@+id/enter_price_text_input"
+            android:id="@+id/enter_price_text_input_edit"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_weight="1"
@@ -131,7 +131,7 @@
             android:hint="Enter Price"/>
 
         <TextView
-            android:id="@+id/TransactionFeeText"
+            android:id="@+id/TransactionFeeText_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
@@ -144,7 +144,7 @@
             android:textColor="#b22222"/>
 
         <EditText
-            android:id="@+id/enter_transaction_fee_text_input"
+            android:id="@+id/enter_transaction_fee_text_input_edit"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_weight="1"
@@ -164,21 +164,23 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/save_button_id"
+                android:id="@+id/update_button_id_edit"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginRight="24dp"
                 android:fontFamily="sans-serif"
                 android:textColor="#fff"
                 android:background="#b22222"
-                android:text="Save" />
+                android:onClick="btnUpdate"
+                android:text="Update" />
 
             <Button
-                android:id="@+id/cancel_button_id"
+                android:id="@+id/cancel_button_id_edit"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:fontFamily="sans-serif"
                 android:textColor="#fff"
+                android:onClick="btnCancel"
                 android:background="#b22222"
                 android:text="Cancel" />
         </LinearLayout>

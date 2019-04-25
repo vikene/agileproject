@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".history"></activity>
+        <activity android:name=".edit_transaction"></activity>
+        <activity android:name=".history" />
         <activity android:name=".performance" />
         <activity android:name=".addWatch" />
         <activity android:name=".add_transaction" />

@@ -19,8 +19,9 @@ public class Holdings_recyclerView extends RecyclerView.ViewHolder implements Vi
     public void setHolding_date(String date){
         holding_date.setText(date);
     }
-    public void setHolding_gain(int prices){
-        holding_gain.setText("$ "+prices+"");
+    public void setHolding_gain(Double prices){
+
+        holding_gain.setText("$ "+String.format("%.2f",prices)+"");
     }
     public Holdings_recyclerView(View itemView){
         super(itemView);

@@ -73,12 +73,13 @@ public class add_transaction extends AppCompatActivity {
                 else
                     {
                     final String ticker_text = mTicker.getText().toString();
-                    final int quant = Integer.parseInt(quantityField.getText().toString());
-                    final int pric = Integer.parseInt(priceField.getText().toString());
+                    final Double quant = Double.parseDouble(quantityField.getText().toString());
+                    final Double pric = Double.parseDouble(priceField.getText().toString());
+                    final Double tr = Double.parseDouble(transactionFeeField.getText().toString());
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("/");
                     String key = myRef.child("/").push().getKey();
-                    transactionData post = new transactionData(ticker_text, quant * pric,itemBuySell,dot.getText().toString());
+                    transactionData post = new transactionData(ticker_text,  pric,itemBuySell,dot.getText().toString(),quant,tr);
                     Map<String, Object> postValues = post.toMap();
 
                     Map<String, Object> childUpdates = new HashMap<>();
